@@ -1,0 +1,1249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="BlogSphere - Share your ideas and inspire the world.">
+  <title>BlogSphere | Modern Blogging Platform</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="supabase-config.js"></script>
+</head>
+
+<body>
+
+<header class="navbar" id="home">
+
+  <a href="#home" class="logo">
+    <span class="logo-mark">B</span>
+    BlogSphere
+  </a>
+
+  <button class="menu-btn" id="menuBtn">☰</button>
+
+  <nav id="navMenu">
+    <a href="#home">Home</a>
+    <a href="#explore">Explore</a>
+    <a href="#categories">Categories</a>
+    <a href="#writers">Writers</a>
+    <a href="#about">About</a>
+  </nav>
+
+  <div class="nav-actions">
+    <button class="icon-btn" id="searchTop">⌕</button>
+    <button class="btn btn-primary" data-open-editor>Write</button>
+    <button class="btn btn-light" data-open-login>Login</button>
+    <button class="btn btn-dark" data-open-signup>Sign Up</button>
+    <button class="btn btn-light" id="authUserBtn" style="display:none"></button>
+    <button class="btn btn-light" id="logoutBtn" style="display:none">Logout</button>
+  </div>
+
+</header>
+
+
+<main>
+
+<!-- HERO -->
+
+<section class="hero section">
+
+  <div class="hero-copy">
+
+    <span class="eyebrow">THE HOME FOR GREAT IDEAS</span>
+
+    <h1>
+      Share Your Ideas.<br>
+      <span>Inspire the World.</span>
+    </h1>
+
+    <p>
+      Write, publish, discover, and connect with readers through BlogSphere.
+    </p>
+
+    <div class="hero-buttons">
+      <button class="btn btn-primary btn-large" data-open-editor>
+        Start Writing →
+      </button>
+
+      <a class="btn btn-outline btn-large" href="#explore">
+        Explore Blogs
+      </a>
+    </div>
+
+    <div class="stats">
+
+      <div>
+        <strong>10K+</strong>
+        <span>Writers</span>
+      </div>
+
+      <div>
+        <strong>50K+</strong>
+        <span>Articles</span>
+      </div>
+
+      <div>
+        <strong>1M+</strong>
+        <span>Readers</span>
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <div class="hero-visual">
+
+    <div class="floating-card top">
+      ✦ Editor's Pick
+    </div>
+
+    <div class="paper">
+
+      <div class="paper-top">
+        <span>BlogSphere</span>
+        <span>•••</span>
+      </div>
+
+      <div class="paper-line small"></div>
+
+      <h3>
+        The future belongs to
+        people who keep learning.
+      </h3>
+
+      <p>
+        Ideas become powerful when they are shared with the world.
+      </p>
+
+      <div class="paper-image"></div>
+
+      <div class="paper-author">
+        <span class="avatar gradient">AM</span>
+        <span>Alex Morgan · 6 min read</span>
+      </div>
+
+    </div>
+
+    <div class="floating-card bottom">
+      ♡ 2.4K likes
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- FEATURED -->
+
+<section class="section" id="featured">
+
+  <div class="section-heading">
+
+    <div>
+      <span class="eyebrow">CURATED FOR YOU</span>
+
+      <h2>Featured Stories</h2>
+
+      <p>Discover stories worth reading.</p>
+    </div>
+
+    <a href="#explore" class="text-link">
+      View all stories →
+    </a>
+
+  </div>
+
+  <div class="blog-grid" id="featuredGrid"></div>
+
+</section>
+
+
+<!-- EXPLORE -->
+
+<section class="section explore-section" id="explore">
+
+  <div class="section-heading center">
+
+    <span class="eyebrow">
+      DISCOVER SOMETHING NEW
+    </span>
+
+    <h2>Explore Blogs</h2>
+
+    <p>Find your next favorite story.</p>
+
+  </div>
+
+
+  <div class="search-box">
+
+    <span>⌕</span>
+
+    <input
+      id="searchInput"
+      type="search"
+      placeholder="Search articles, topics, or writers..."
+    >
+
+  </div>
+
+
+  <div class="filters" id="filters">
+
+    <button class="filter active" data-filter="All">
+      All
+    </button>
+
+    <button class="filter" data-filter="Technology">
+      Technology
+    </button>
+
+    <button class="filter" data-filter="Programming">
+      Programming
+    </button>
+
+    <button class="filter" data-filter="AI">
+      AI
+    </button>
+
+    <button class="filter" data-filter="Business">
+      Business
+    </button>
+
+    <button class="filter" data-filter="Productivity">
+      Productivity
+    </button>
+
+    <button class="filter" data-filter="Lifestyle">
+      Lifestyle
+    </button>
+
+    <button class="filter" data-filter="Design">
+      Design
+    </button>
+
+    <button class="filter" data-filter="Education">
+      Education
+    </button>
+
+    <button class="filter" data-filter="Travel">
+      Travel
+    </button>
+
+  </div>
+
+
+  <div class="blog-grid" id="exploreGrid"></div>
+
+  <p class="empty-state hidden" id="noResults">
+    No articles found. Try another search.
+  </p>
+
+</section>
+
+
+<!-- TRENDING -->
+
+<section class="section split-section">
+
+  <div>
+
+    <span class="eyebrow">
+      WHAT'S HOT
+    </span>
+
+    <h2>Trending This Week</h2>
+
+    <p class="muted">
+      The stories everyone is talking about.
+    </p>
+
+  </div>
+
+  <div class="trending-list" id="trendingList"></div>
+
+</section>
+
+
+<!-- CATEGORIES -->
+
+<section class="section" id="categories">
+
+  <div class="section-heading center">
+
+    <span class="eyebrow">
+      FIND YOUR NICHE
+    </span>
+
+    <h2>Explore Categories</h2>
+
+  </div>
+
+  <div class="category-grid" id="categoryGrid"></div>
+
+</section>
+
+
+<!-- WRITERS -->
+
+<section class="section tinted" id="writers">
+
+  <div class="section-heading center">
+
+    <span class="eyebrow">
+      MEET THE COMMUNITY
+    </span>
+
+    <h2>Popular Writers</h2>
+
+    <p>
+      Follow creators whose ideas you love.
+    </p>
+
+  </div>
+
+  <div class="writer-grid" id="writerGrid"></div>
+
+</section>
+
+
+<!-- WRITE SECTION -->
+
+<section class="section write-section">
+
+  <div class="write-copy">
+
+    <span class="eyebrow">
+      YOUR VOICE MATTERS
+    </span>
+
+    <h2>
+      Your Ideas Deserve to Be Heard.
+    </h2>
+
+    <p>
+      Turn your knowledge, experiences, and ideas into stories
+      that reach thousands of readers.
+    </p>
+
+    <button
+      class="btn btn-dark btn-large"
+      data-open-editor
+    >
+      Start Writing →
+    </button>
+
+  </div>
+
+
+  <div class="mini-editor">
+
+    <div class="mini-toolbar">
+      <span>Untitled story</span>
+      <span>•••</span>
+    </div>
+
+    <div class="mini-title">
+      How I learned to build better habits
+    </div>
+
+    <div class="mini-lines"></div>
+
+    <div class="mini-footer">
+      <span>Last saved just now</span>
+      <button>Publish</button>
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- EDITOR -->
+
+<section class="section" id="editor">
+
+  <div class="section-heading center">
+
+    <span class="eyebrow">
+      CREATE YOUR STORY
+    </span>
+
+    <h2>Write. Edit. Publish.</h2>
+
+    <p>
+      A simple writing experience designed for creators.
+    </p>
+
+  </div>
+
+
+  <div class="editor-demo">
+
+    <div class="editor-toolbar">
+
+      <button data-format="bold">
+        <b>B</b>
+      </button>
+
+      <button data-format="italic">
+        <i>I</i>
+      </button>
+
+      <button data-format="underline">
+        <u>U</u>
+      </button>
+
+      <button>H</button>
+      <button>❝</button>
+      <button>↗</button>
+      <button>▧</button>
+      <button>☷</button>
+
+    </div>
+
+
+    <input
+      class="editor-title"
+      id="editorTitle"
+      placeholder="Enter your story title..."
+    >
+
+    <select id="editorCategory" class="editor-category">
+      <option value="Technology">Technology</option>
+      <option value="Programming">Programming</option>
+      <option value="AI">AI</option>
+      <option value="Business">Business</option>
+      <option value="Productivity">Productivity</option>
+      <option value="Lifestyle">Lifestyle</option>
+      <option value="Design">Design</option>
+      <option value="Education">Education</option>
+      <option value="Travel">Travel</option>
+    </select>
+
+
+    <div
+      class="editor-body"
+      id="editorBody"
+      contenteditable="true"
+    >
+      Start writing your story...
+    </div>
+
+
+    <div class="editor-actions">
+
+      <button class="btn btn-light" id="saveDraft">
+        Save Draft
+      </button>
+
+      <button class="btn btn-light" id="previewBtn">
+        Preview
+      </button>
+
+      <button class="btn btn-primary" id="publishBtn">
+        Publish Story
+      </button>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- DASHBOARD -->
+
+<section class="section dashboard-section">
+
+  <div class="section-heading">
+
+    <div>
+
+      <span class="eyebrow">
+        FOR CREATORS
+      </span>
+
+      <h2>Author Dashboard</h2>
+
+      <p>
+        Everything a writer needs in one place.
+      </p>
+
+    </div>
+
+  </div>
+
+
+  <div class="dashboard">
+
+    <aside class="dashboard-side">
+
+      <div class="dash-user">
+
+        <span class="avatar purple">
+          AM
+        </span>
+
+        <div>
+          <b>Alex Morgan</b>
+          <small>Writer</small>
+        </div>
+
+      </div>
+
+
+      <button class="dash-link active">
+        ▦ Dashboard
+      </button>
+
+      <button class="dash-link">
+        ▤ My Posts
+      </button>
+
+      <button class="dash-link">
+        ◷ Drafts
+      </button>
+
+      <button class="dash-link">
+        ✓ Published
+      </button>
+
+      <button class="dash-link">
+        ⌁ Analytics
+      </button>
+
+      <button class="dash-link">
+        ♡ Comments
+      </button>
+
+      <button class="dash-link">
+        🔖 Bookmarks
+      </button>
+
+      <button class="dash-link">
+        ⚙ Settings
+      </button>
+
+    </aside>
+
+
+    <div class="dashboard-main">
+
+      <h3>Overview</h3>
+
+      <div class="metric-grid">
+
+        <div class="metric">
+          <span>Total Articles</span>
+          <b>48</b>
+          <small>↑ 12% this month</small>
+        </div>
+
+        <div class="metric">
+          <span>Published</span>
+          <b>36</b>
+          <small>4 this month</small>
+        </div>
+
+        <div class="metric">
+          <span>Drafts</span>
+          <b>12</b>
+          <small>3 updated today</small>
+        </div>
+
+        <div class="metric">
+          <span>Total Views</span>
+          <b>128.4K</b>
+          <small>↑ 18.4%</small>
+        </div>
+
+        <div class="metric">
+          <span>Followers</span>
+          <b>8.7K</b>
+          <small>↑ 324 this month</small>
+        </div>
+
+        <div class="metric">
+          <span>Total Likes</span>
+          <b>24.8K</b>
+          <small>↑ 9.2%</small>
+        </div>
+
+      </div>
+
+
+      <div class="dash-lower">
+
+        <div class="chart-card">
+
+          <div class="card-head">
+            <h3>Views Overview</h3>
+            <span>Last 6 months ▾</span>
+          </div>
+
+          <div class="bars">
+            <i style="height:42%"></i>
+            <i style="height:56%"></i>
+            <i style="height:48%"></i>
+            <i style="height:72%"></i>
+            <i style="height:66%"></i>
+            <i style="height:88%"></i>
+          </div>
+
+          <div class="month-labels">
+            <span>Jan</span>
+            <span>Feb</span>
+            <span>Mar</span>
+            <span>Apr</span>
+            <span>May</span>
+            <span>Jun</span>
+          </div>
+
+        </div>
+
+
+        <div class="chart-card">
+
+          <div class="card-head">
+            <h3>Reader engagement</h3>
+            <span>June</span>
+          </div>
+
+          <div class="donut">
+            <strong>78%</strong>
+            <span>Avg. completion</span>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <div class="posts-card">
+
+    <div class="card-head">
+
+      <h3>My Posts</h3>
+
+      <button class="btn btn-light">
+        View all
+      </button>
+
+    </div>
+
+
+    <div class="table-wrap">
+
+      <table>
+
+        <thead>
+
+          <tr>
+            <th>Article</th>
+            <th>Status</th>
+            <th>Views</th>
+            <th>Likes</th>
+            <th>Date</th>
+            <th>Action</th>
+          </tr>
+
+        </thead>
+
+        <tbody id="postTable"></tbody>
+
+      </table>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- ANALYTICS -->
+
+<section class="section analytics-section">
+
+  <div class="section-heading center">
+
+    <span class="eyebrow">
+      KNOW YOUR AUDIENCE
+    </span>
+
+    <h2>Analytics at a Glance</h2>
+
+  </div>
+
+
+  <div class="analytics-grid">
+
+    <div>
+      <span>Total Views</span>
+      <b>128,420</b>
+    </div>
+
+    <div>
+      <span>Unique Readers</span>
+      <b>91,284</b>
+    </div>
+
+    <div>
+      <span>Avg. Reading Time</span>
+      <b>5m 42s</b>
+    </div>
+
+    <div>
+      <span>Likes</span>
+      <b>24,812</b>
+    </div>
+
+    <div>
+      <span>Comments</span>
+      <b>4,238</b>
+    </div>
+
+    <div>
+      <span>Followers</span>
+      <b>8,742</b>
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- TESTIMONIALS -->
+
+<section class="section testimonials">
+
+  <div class="section-heading center">
+
+    <span class="eyebrow">
+      FROM OUR COMMUNITY
+    </span>
+
+    <h2>What Our Writers Say</h2>
+
+  </div>
+
+
+  <div class="testimonial-grid">
+
+    <article>
+
+      <div class="stars">
+        ★★★★★
+      </div>
+
+      <p>
+        “BlogSphere helped me turn my technical knowledge into an audience.”
+      </p>
+
+      <div class="person">
+        <span class="avatar blue">AM</span>
+        <b>Alex Morgan</b>
+      </div>
+
+    </article>
+
+
+    <article>
+
+      <div class="stars">
+        ★★★★★
+      </div>
+
+      <p>
+        “I love how simple it is to publish and organize my articles.”
+      </p>
+
+      <div class="person">
+        <span class="avatar pink">SJ</span>
+        <b>Sarah Johnson</b>
+      </div>
+
+    </article>
+
+
+    <article>
+
+      <div class="stars">
+        ★★★★★
+      </div>
+
+      <p>
+        “The platform makes writing feel effortless and keeps me focused on ideas.”
+      </p>
+
+      <div class="person">
+        <span class="avatar green">DW</span>
+        <b>David Wilson</b>
+      </div>
+
+    </article>
+
+  </div>
+
+</section>
+
+
+<!-- NEWSLETTER -->
+
+<section class="section newsletter">
+
+  <div>
+
+    <span class="eyebrow">
+      NEVER MISS A STORY
+    </span>
+
+    <h2>Stay in the Loop</h2>
+
+    <p>
+      Get the best stories from BlogSphere delivered straight to your inbox.
+    </p>
+
+  </div>
+
+
+  <form id="newsletterForm">
+
+    <input
+      type="email"
+      placeholder="Enter your email address"
+      required
+    >
+
+    <button class="btn btn-dark">
+      Subscribe
+    </button>
+
+  </form>
+
+</section>
+
+
+<!-- CTA -->
+
+<section class="section final-cta" id="about">
+
+  <div>
+
+    <span class="eyebrow">
+      START TODAY
+    </span>
+
+    <h2>
+      Ready to Share Your Story?
+    </h2>
+
+    <p>
+      Join thousands of writers building their audience on BlogSphere.
+    </p>
+
+  </div>
+
+
+  <div class="hero-buttons">
+
+    <button
+      class="btn btn-primary btn-large"
+      data-open-editor
+    >
+      Start Writing
+    </button>
+
+    <a
+      href="#explore"
+      class="btn btn-outline btn-large"
+    >
+      Explore Stories
+    </a>
+
+  </div>
+
+</section>
+
+</main>
+
+
+<!-- FOOTER -->
+
+<footer>
+
+  <div class="footer-main">
+
+    <div class="footer-brand">
+
+      <a href="#home" class="logo">
+        <span class="logo-mark">B</span>
+        BlogSphere
+      </a>
+
+      <p>
+        Where ideas become stories.
+      </p>
+
+    </div>
+
+
+    <div>
+
+      <h4>Platform</h4>
+
+      <a href="#home">Home</a>
+      <a href="#explore">Explore</a>
+      <a href="#categories">Categories</a>
+      <a href="#writers">Writers</a>
+      <a href="#featured">Trending</a>
+
+    </div>
+
+
+    <div>
+
+      <h4>Resources</h4>
+
+      <a href="#">Writing Guide</a>
+      <a href="#">Community</a>
+      <a href="#">Help Center</a>
+      <a href="#">FAQs</a>
+
+    </div>
+
+
+    <div>
+
+      <h4>Company</h4>
+
+      <a href="#about">About</a>
+      <a href="#">Careers</a>
+      <a href="#">Contact</a>
+      <a href="#">Privacy</a>
+      <a href="#">Terms</a>
+
+    </div>
+
+
+    <div>
+
+      <h4>Social</h4>
+
+      <a href="#">Instagram</a>
+      <a href="#">LinkedIn</a>
+      <a href="#">Twitter/X</a>
+      <a href="#">YouTube</a>
+
+    </div>
+
+  </div>
+
+
+  <div class="footer-bottom">
+
+    <span>
+      © 2026 BlogSphere. All rights reserved.
+    </span>
+
+    <span>
+      Made for people who love to write.
+    </span>
+
+  </div>
+
+</footer>
+
+
+<!-- LOGIN MODAL -->
+
+<div class="modal-backdrop" id="loginModal">
+
+  <div class="modal">
+
+    <button class="close" data-close>
+      ×
+    </button>
+
+    <span class="eyebrow">
+      WELCOME BACK
+    </span>
+
+    <h2>
+      Log in to BlogSphere
+    </h2>
+
+    <p>
+      Continue creating and sharing your stories.
+    </p>
+
+
+    <form id="loginForm">
+
+      <label>
+        Email
+
+        <input
+          id="loginEmail"
+          type="email"
+          required
+          placeholder="you@example.com"
+        >
+
+      </label>
+
+
+      <label>
+        Password
+
+        <input
+          id="loginPassword"
+          type="password"
+          required
+          placeholder="••••••••"
+        >
+
+      </label>
+
+
+      <a href="#" class="forgot">
+        Forgot password?
+      </a>
+
+
+      <button class="btn btn-dark full">
+        Login
+      </button>
+
+      <p id="authMessage" class="auth-message"></p>
+
+
+      <button
+        type="button"
+        class="google"
+      >
+        G Continue with Google
+      </button>
+
+    </form>
+
+  </div>
+
+</div>
+
+
+<!-- SIGNUP MODAL -->
+
+<div class="modal-backdrop" id="signupModal">
+
+  <div class="modal">
+
+    <button class="close" data-close>
+      ×
+    </button>
+
+    <span class="eyebrow">
+      JOIN BLOGSPHERE
+    </span>
+
+    <h2>
+      Create your account
+    </h2>
+
+    <p>
+      Start publishing your ideas today.
+    </p>
+
+
+    <form id="signupForm">
+
+      <label>
+        Full Name
+        <input id="signupName" required placeholder="Your name">
+      </label>
+
+      <label>
+        Email
+        <input
+          id="signupEmail"
+          type="email"
+          required
+          placeholder="you@example.com"
+        >
+      </label>
+
+      <label>
+        Username
+        <input id="signupUsername" required placeholder="@username">
+      </label>
+
+      <label>
+        Password
+        <input
+          id="signupPassword"
+          type="password"
+          required
+          placeholder="Create a password"
+        >
+      </label>
+
+      <label>
+        Confirm Password
+        <input
+          id="signupConfirmPassword"
+          type="password"
+          required
+          placeholder="Repeat password"
+        >
+      </label>
+
+      <label class="check">
+        <input type="checkbox" required>
+        I agree to the Terms and Conditions
+      </label>
+
+      <button class="btn btn-dark full">
+        Create Account
+      </button>
+
+      <p id="signupMessage" class="auth-message"></p>
+
+    </form>
+
+  </div>
+
+</div>
+
+
+<!-- BLOG MODAL -->
+
+<div class="modal-backdrop" id="blogModal">
+
+  <div class="modal blog-modal">
+
+    <button class="close" data-close>
+      ×
+    </button>
+
+    <img
+      id="modalImage"
+      class="modal-cover"
+      alt="Article cover"
+    >
+
+    <span id="modalCategory" class="tag"></span>
+
+    <h2 id="modalTitle"></h2>
+
+    <div id="modalMeta" class="post-meta"></div>
+
+    <div
+      id="modalContent"
+      class="article-content"
+    ></div>
+
+
+    <div class="modal-actions">
+
+      <button class="like-modal">
+        ♡ Like
+      </button>
+
+      <button>
+        🔖 Bookmark
+      </button>
+
+      <button id="shareBtn">
+        ↗ Share
+      </button>
+
+    </div>
+
+
+    <hr>
+
+    <h3>
+      Comments
+    </h3>
+
+    <div id="comments"></div>
+
+
+    <form
+      id="commentForm"
+      class="comment-form"
+    >
+
+      <input
+        id="commentInput"
+        placeholder="Write a comment..."
+        required
+      >
+
+      <button class="btn btn-primary">
+        Post
+      </button>
+
+    </form>
+
+  </div>
+
+</div>
+
+
+<!-- PREVIEW MODAL -->
+
+<div class="modal-backdrop" id="previewModal">
+
+  <div class="modal">
+
+    <button class="close" data-close>
+      ×
+    </button>
+
+    <span class="eyebrow">
+      PREVIEW
+    </span>
+
+    <h2 id="previewTitle">
+      Your Story
+    </h2>
+
+    <p id="previewText"></p>
+
+    <button
+      class="btn btn-dark"
+      data-close
+    >
+      Back to editor
+    </button>
+
+  </div>
+
+</div>
+
+
+<div class="toast" id="toast"></div>
+
+<button
+  class="top-btn"
+  id="topBtn"
+>
+  ↑
+</button>
+
+
+<script src="script.js"></script>
+
+</body>
+</html>
